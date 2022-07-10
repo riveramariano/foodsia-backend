@@ -99,3 +99,11 @@ exports.eliminarReceta = async (req, res) => {
     res.status(404).send('Hubo un error');
   }
 }
+
+exports.listarProductos = async (req, res) => {
+  // Petición a ejecutar
+  const sqlQuery = `select r.id, r.nombreProducto from tbl_producto as r order by r.nombreProducto`;
+  const rows = await query(sqlQuery);
+
+  res.json({ rows });
+}
