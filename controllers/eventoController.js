@@ -9,7 +9,8 @@ exports.listarEventos = async (req, res) => {
 
   let eventosCalendario = [];
   for (const evento of eventos) {
-    const mesEvento = moment(evento.fechaEventoInicio).format("MM");
+    const mesEventoInicio = moment(evento.fechaEventoInicio).format("MM");
+    const mesEventoFin = moment(evento.fechaEventoFin).format("MM");
     const diaInicioEvento = moment(evento.fechaEventoInicio).format("DD");
     const diaFinEvento = moment(evento.fechaEventoFin).format("DD");
 
@@ -28,8 +29,8 @@ exports.listarEventos = async (req, res) => {
     if (["Aniversario Cliente", "Cumpleaños Mascota"].includes(evento.nombreTipoEvento)) {
       const annioInicio = parseInt(moment(evento.fechaEventoInicio).format("YYYY")) + 1;
       for (let i = annioInicio; i <= 2030; i++) {
-        const fechaInicio = new Date(i, mesEvento - 1, diaInicioEvento);
-        const fechaFin = new Date(i, mesEvento - 1, diaFinEvento);
+        const fechaInicio = new Date(i, mesEventoInicio - 1, diaInicioEvento);
+        const fechaFin = new Date(i, mesEventoFin - 1, diaFinEvento);
         eventosCalendario.push({
           id: evento.id,
           title: evento.motivo,
@@ -44,8 +45,8 @@ exports.listarEventos = async (req, res) => {
     if (["Festividad", "Aniversario GPF"].includes(evento.nombreTipoEvento)) {
       const annioInicio = parseInt(moment(evento.fechaEventoInicio).format("YYYY"));
       for (let i = annioInicio; i <= 2030; i++) {
-        const fechaInicio = new Date(i, mesEvento - 1, diaInicioEvento);
-        const fechaFin = new Date(i, mesEvento - 1, diaFinEvento);
+        const fechaInicio = new Date(i, mesEventoInicio - 1, diaInicioEvento);
+        const fechaFin = new Date(i, mesEventoFin - 1, diaFinEvento);
         eventosCalendario.push({
           id: evento.id,
           title: evento.motivo,
