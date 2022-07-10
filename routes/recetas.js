@@ -33,4 +33,10 @@ router.delete('/:id',
   recetaController.eliminarReceta
 );
 
+// Obtener la lista de productos completa
+router.get('/lista/productos',
+  auth,
+  recetaController.listarProductos
+);
+
 module.exports = router;
